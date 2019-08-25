@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+
+    <context:component-scan base-package="com.xum.search.service,com.xum.search.solrdao"/>
+
+    <bean id="solrServer" class="org.apache.solr.client.solrj.impl.HttpSolrServer">
+        <constructor-arg name="baseURL" value="http://192.168.100.100:8080/solr/collection1"/>
+    </bean>
+
+<!--    使用dubbo发布服务-->
+<!--    提供方信息-->
+    <dubbo:application name="e3-search"/>
+    <dubbo:registry protocol="zookeeper" address="192.168.100.100:2181"/>
+<!--    在20882端口暴露服务-->
+    <dubbo:protocol name="dubbo" port="20882"/>
+<!--    声明要暴露的服务接口-->
+    <dubbo:service interface="com.xum.search.service.SearchItemService" ref="searchItemServiceImpl" timeout="10000"/>
+    <dubbo:service interface="com.xum.search.service.SearchSolrService" ref="searchSolrServiceImpl" timeout="6000"/>
+</beans>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd ">
+
+<!--    真正生产的connetion的factory，由对应的jms提供-->
+    <bean id="targetFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
+        <property name="brokerURL" value="tcp://192.168.100.100:61616"/>
+    </bean>
+
+<!--    spring管理的factory-->
+    <bean id="singleConnectionFactory" class="org.springframework.jms.connection.SingleConnectionFactory">
+        <property name="targetConnectionFactory" ref="targetFactory"/>
+    </bean>
+
+<!--    队列目的地,点对点-->
+    <bean id="destinationQueue" class="org.apache.activemq.command.ActiveMQQueue">
+        <constructor-arg>
+            <value>spring-queue</value>
+        </constructor-arg>
+    </bean>
+
+<!--    广播目的地,一对多-->
+    <bean id="destinationTopic" class="org.apache.activemq.command.ActiveMQTopic">
+        <constructor-arg value="spring-topic"/>
+    </bean>
+
+
+<!--    监听消息,同步索引库-->
+    <bean id="itemMessageListener" class="com.xum.search.message.ItemAddMessageListener"/>
+
+    <bean class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+        <property name="connectionFactory" ref="singleConnectionFactory"/>
+        <property name="destination" ref="destinationTopic"/>
+        <property name="messageListener" ref="itemMessageListener"/>
+
+    </bean>
+</beans>

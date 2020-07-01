@@ -47,7 +47,7 @@
         <activemq.version>5.15.9</activemq.version>
         <jms.version>2.0.1</jms.version>
         <freemarker.version>2.3.23</freemarker.version>
-        <quartz.version>2.2.2</quartz.version>
+        <quartz.version>2.3.2</quartz.version>
 
 
         <lombok.version>1.16.6</lombok.version>

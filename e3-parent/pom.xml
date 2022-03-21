@@ -41,7 +41,7 @@
         <jedis.version>2.9.0</jedis.version>
         <spring-data-redis>2.1.10.RELEASE</spring-data-redis>
         <solrj.version>4.10.3</solrj.version>
-        <dubbo.version>2.5.3</dubbo.version>
+        <dubbo.version>2.6.9</dubbo.version>
         <zookeeper.version>3.4.9</zookeeper.version>
         <zkclient.version>0.1</zkclient.version>
         <activemq.version>5.15.9</activemq.version>

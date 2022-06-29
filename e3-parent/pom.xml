@@ -42,7 +42,7 @@
         <spring-data-redis>2.1.10.RELEASE</spring-data-redis>
         <solrj.version>4.10.3</solrj.version>
         <dubbo.version>2.5.3</dubbo.version>
-        <zookeeper.version>3.4.9</zookeeper.version>
+        <zookeeper.version>3.4.14</zookeeper.version>
         <zkclient.version>0.1</zkclient.version>
         <activemq.version>5.15.9</activemq.version>
         <jms.version>2.0.1</jms.version>
